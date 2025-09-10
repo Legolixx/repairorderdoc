@@ -39,7 +39,7 @@ components:
         valorUnitario:
           format: double
           type: number
-      title: Produto - Ordem de Serviço
+      title: Produto - Repair
       type: object
     CargaOrdemServicoMecanicoVM:
       additionalProperties: false
@@ -61,7 +61,7 @@ components:
           format: int32
           nullable: true
           type: integer
-      title: Mecânico - Ordem de Serviço
+      title: Mecânico - Repair
       type: object
     CargaOrdemServicoNotaFiscalVM:
       additionalProperties: false
@@ -101,7 +101,7 @@ components:
           format: int32
           nullable: true
           type: integer
-      title: Cliente - Ordem de Serviço
+      title: Cliente - Repair
       type: object
     CargaOrdemServicoServicoVM:
       additionalProperties: false
@@ -152,7 +152,7 @@ components:
         valorUnitario:
           format: double
           type: number
-      title: Serviço - Ordem de Serviço
+      title: Serviço - Repair
       type: object
     CargaOrdemServicoVM:
       additionalProperties: false
@@ -224,7 +224,7 @@ components:
           type: number
         veiculo:
           $ref: '#/components/schemas/CargaOrdemServicoVeiculoVM'
-      title: Ordem de Serviço
+      title: Repair
       type: object
     CargaOrdemServicoVeiculoVM:
       additionalProperties: false
@@ -253,7 +253,7 @@ components:
         placa:
           nullable: true
           type: string
-      title: Veículo - Ordem de Serviço
+      title: Veículo - Repair
       type: object
     CargaOrdemServicoVendedorVM:
       additionalProperties: false
@@ -271,7 +271,7 @@ components:
           format: int32
           nullable: true
           type: integer
-      title: Funcionario - Ordem de Serviço
+      title: Funcionario - Repair
       type: object
     CargaVeiculoVM:
       additionalProperties: false
@@ -447,7 +447,7 @@ components:
   securitySchemes:
     Bearer:
       bearerFormat: JWT
-      description: Coloque SOMENTE o JWT Bearer token na caixa de texto abaixo!
+      description: JWT Bearer token
       scheme: bearer
       type: http
 info:
@@ -455,7 +455,7 @@ info:
   version: V1
 openapi: 3.0.1
 paths:
-  /api/Carga/OrdemServico:
+  /api/Carga/RepairOrder:
     post:
       requestBody:
         content:
@@ -524,8 +524,8 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
           description: Unauthorized
       tags:
-      - Carga - Ordem de Serviço
-  /api/Carga/OrdemServico/Arquivo:
+      - Carga - Repair Order
+  /api/Carga/RepairOrder/Arquivo:
     post:
       requestBody:
         content:
@@ -613,7 +613,7 @@ paths:
                 $ref: '#/components/schemas/ProblemDetails'
           description: Unauthorized
       tags:
-      - Carga - Ordem de Serviço
+      - Carga - Repair Order
   /api/Carga/Veiculo:
     post:
       requestBody:
