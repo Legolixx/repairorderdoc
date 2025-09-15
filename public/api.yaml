@@ -3,6 +3,9 @@ components:
     CargaOrdemServicoItemVM:
       additionalProperties: false
       properties:
+        tipoOrdemServico:
+          nullable: true
+          type: string
         codigo:
           nullable: true
           type: string
@@ -94,18 +97,47 @@ components:
         cpfCnpj:
           nullable: true
           type: string
-        nome:
+        FirstName:
           nullable: true
           type: string
-        tipoPessoa:
-          format: int32
+        LastName:
           nullable: true
-          type: integer
-      title: Cliente - Repair
+          type: string
+        Email:
+          nullable: true
+          type: string
+        MobNumber:
+          nullable: true
+          type: string
+        TelNumber:
+          nullable: true
+          type: string
+        State:
+          nullable: true
+          type: string
+        City:
+          nullable: true
+          type: string  
+        Country:
+          nullable: true
+          type: string
+        HouseNo:
+          nullable: true
+          type: string
+        Street:
+          nullable: true
+          type: string
+        PostalCode:
+          nullable: true
+          type: string           
+      title: Cliente - Repair Order
       type: object
     CargaOrdemServicoServicoVM:
       additionalProperties: false
       properties:
+        tipoOrdemServico:
+          nullable: true
+          type: string
         codigo:
           nullable: true
           type: string
@@ -159,12 +191,18 @@ components:
       properties:
         cliente:
           $ref: '#/components/schemas/CargaOrdemServicoPessoaVM'
+        id:
+          nullable: true
+          type: string  
+        OsNumber:
+          nullable: true
+          type: string  
+        DealerCode:
+          nullable: true
+          type: string
         codigoControlePrisma:
           nullable: true
           type: string
-        concessionariaId:
-          format: int32
-          type: integer
         dataAbertura:
           format: date-time
           type: string
@@ -176,19 +214,13 @@ components:
           format: date-time
           nullable: true
           type: string
-        descricaoTipoOrdemServico:
+        descricaoOrdemServico:
           nullable: true
           type: string
-        filialId:
-          format: int32
-          type: integer
         funcionarioAbertura:
           $ref: '#/components/schemas/CargaOrdemServicoVendedorVM'
         funcionarioCancelamento:
           $ref: '#/components/schemas/CargaOrdemServicoVendedorVM'
-        id:
-          nullable: true
-          type: string
         motivoCancelamento:
           nullable: true
           type: string
@@ -197,9 +229,6 @@ components:
             $ref: '#/components/schemas/CargaOrdemServicoNotaFiscalVM'
           nullable: true
           type: array
-        numeroOrdemServico:
-          nullable: true
-          type: string
         servicos:
           items:
             $ref: '#/components/schemas/CargaOrdemServicoServicoVM'
@@ -207,9 +236,6 @@ components:
           type: array
         statusOrdemServico:
           $ref: '#/components/schemas/StatusOrdemServico'
-        tipoOrdemServico:
-          nullable: true
-          type: string
         valorDesconto:
           format: double
           type: number
@@ -267,10 +293,6 @@ components:
         nome:
           nullable: true
           type: string
-        tipoPessoa:
-          format: int32
-          nullable: true
-          type: integer
       title: Funcionario - Repair
       type: object
     CargaVeiculoVM:
@@ -428,7 +450,7 @@ components:
       type: string
     StatusOrdemServico:
       enum:
-      - N
+      - O
       - C
       type: string
     TipoNota:
@@ -525,95 +547,6 @@ paths:
           description: Unauthorized
       tags:
       - Carga - Repair Order
-  /api/Carga/RepairOrder/Arquivo:
-    post:
-      requestBody:
-        content:
-          multipart/form-data:
-            encoding:
-              ContentDisposition:
-                style: form
-              ContentType:
-                style: form
-              FileName:
-                style: form
-              Headers:
-                style: form
-              Length:
-                style: form
-              Name:
-                style: form
-            schema:
-              properties:
-                ContentDisposition:
-                  type: string
-                ContentType:
-                  type: string
-                FileName:
-                  type: string
-                Headers:
-                  additionalProperties:
-                    items:
-                      type: string
-                    type: array
-                  type: object
-                Length:
-                  format: int64
-                  type: integer
-                Name:
-                  type: string
-              type: object
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/ResultImportPosVendaDto'
-                type: array
-            text/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/ResultImportPosVendaDto'
-                type: array
-            text/plain:
-              schema:
-                items:
-                  $ref: '#/components/schemas/ResultImportPosVendaDto'
-                type: array
-          description: Success
-        '400':
-          content:
-            application/json:
-              schema:
-                items:
-                  type: string
-                type: array
-            text/json:
-              schema:
-                items:
-                  type: string
-                type: array
-            text/plain:
-              schema:
-                items:
-                  type: string
-                type: array
-          description: Bad Request
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProblemDetails'
-            text/json:
-              schema:
-                $ref: '#/components/schemas/ProblemDetails'
-            text/plain:
-              schema:
-                $ref: '#/components/schemas/ProblemDetails'
-          description: Unauthorized
-      tags:
-      - Carga - Repair Order
   /api/Carga/Veiculo:
     post:
       requestBody:
@@ -633,95 +566,6 @@ paths:
               items:
                 $ref: '#/components/schemas/CargaVendaVeiculoVM'
               type: array
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/ResultImportPosVendaDto'
-                type: array
-            text/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/ResultImportPosVendaDto'
-                type: array
-            text/plain:
-              schema:
-                items:
-                  $ref: '#/components/schemas/ResultImportPosVendaDto'
-                type: array
-          description: Success
-        '400':
-          content:
-            application/json:
-              schema:
-                items:
-                  type: string
-                type: array
-            text/json:
-              schema:
-                items:
-                  type: string
-                type: array
-            text/plain:
-              schema:
-                items:
-                  type: string
-                type: array
-          description: Bad Request
-        '401':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProblemDetails'
-            text/json:
-              schema:
-                $ref: '#/components/schemas/ProblemDetails'
-            text/plain:
-              schema:
-                $ref: '#/components/schemas/ProblemDetails'
-          description: Unauthorized
-      tags:
-      - Carga - Veículo
-  /api/Carga/Veiculo/Arquivo:
-    post:
-      requestBody:
-        content:
-          multipart/form-data:
-            encoding:
-              ContentDisposition:
-                style: form
-              ContentType:
-                style: form
-              FileName:
-                style: form
-              Headers:
-                style: form
-              Length:
-                style: form
-              Name:
-                style: form
-            schema:
-              properties:
-                ContentDisposition:
-                  type: string
-                ContentType:
-                  type: string
-                FileName:
-                  type: string
-                Headers:
-                  additionalProperties:
-                    items:
-                      type: string
-                    type: array
-                  type: object
-                Length:
-                  format: int64
-                  type: integer
-                Name:
-                  type: string
-              type: object
       responses:
         '200':
           content:
