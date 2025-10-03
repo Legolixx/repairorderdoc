@@ -478,7 +478,7 @@ info:
 openapi: 3.0.1
 paths:
   /api/Carga/RepairOrder:
-    post:
+    get:
       requestBody:
         content:
           application/*+json:
@@ -548,7 +548,7 @@ paths:
       tags:
       - Carga - Repair Order
   /api/Carga/Veiculo:
-    post:
+    get:
       requestBody:
         content:
           application/*+json:
