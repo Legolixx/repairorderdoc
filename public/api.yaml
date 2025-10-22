@@ -3,18 +3,18 @@ components:
     CargaOrdemServicoItemVM:
       additionalProperties: false
       properties:
+        id:
+          format: int32
+          type: integer
         tipoOrdemServico:
           nullable: true
           type: string
-        codigo:
+        codigoProduto:
           nullable: true
           type: string
         descricao:
           nullable: true
           type: string
-        id:
-          format: int32
-          type: integer
         numeroNota:
           format: int32
           type: integer
@@ -47,24 +47,20 @@ components:
     CargaOrdemServicoMecanicoVM:
       additionalProperties: false
       properties:
-        cargo:
+        cargoTecnico:
           nullable: true
           type: string
-        cpfCnpj:
+        cpfCnpjTecnico:
           nullable: true
           type: string
-        nome:
+        nomeTecnico:
           nullable: true
           type: string
         tempoTrabalhado:
           example: 00:00:00
           nullable: true
           type: string
-        tipoPessoa:
-          format: int32
-          nullable: true
-          type: integer
-      title: Mecânico - Repair
+      title: Técnico - Repair
       type: object
     CargaOrdemServicoNotaFiscalVM:
       additionalProperties: false
@@ -77,17 +73,17 @@ components:
           format: date-time
           nullable: true
           type: string
-        numero:
+        numeroNF:
           format: int32
           type: integer
         serie:
           nullable: true
           type: string
-        status:
+        statusNF:
           $ref: '#/components/schemas/StatusNota'
-        tipo:
+        tipoNF:
           $ref: '#/components/schemas/TipoNota'
-        total:
+        totalNF:
           format: double
           type: number
       type: object
@@ -135,10 +131,13 @@ components:
     CargaOrdemServicoServicoVM:
       additionalProperties: false
       properties:
+        id:
+          format: int32
+          type: integer
         tipoOrdemServico:
           nullable: true
           type: string
-        codigo:
+        codigoServico:
           nullable: true
           type: string
         descricao:
@@ -149,9 +148,6 @@ components:
             $ref: '#/components/schemas/CargaOrdemServicoMecanicoVM'
           nullable: true
           type: array
-        id:
-          format: int32
-          type: integer
         numeroNota:
           format: int32
           type: integer
@@ -160,28 +156,16 @@ components:
             $ref: '#/components/schemas/CargaOrdemServicoItemVM'
           nullable: true
           type: array
-        quantidade:
-          format: double
-          type: number
         serieNota:
           nullable: true
           type: string
-        valorCustoMedio:
+        TempoMO:
           format: double
           type: number
         valorDesconto:
           format: double
-          type: number
-        valorImpostos:
-          format: double
-          type: number
-        valorTotalBruto:
-          format: double
-          type: number
-        valorTotalLiquido:
-          format: double
-          type: number
-        valorUnitario:
+          type: number  
+        valorMO:
           format: double
           type: number
       title: Serviço - Repair
@@ -189,11 +173,11 @@ components:
     CargaOrdemServicoVM:
       additionalProperties: false
       properties:
-        cliente:
-          $ref: '#/components/schemas/CargaOrdemServicoPessoaVM'
         id:
           nullable: true
           type: string  
+        cliente:
+          $ref: '#/components/schemas/CargaOrdemServicoPessoaVM'
         OsNumber:
           nullable: true
           type: string  
@@ -250,6 +234,12 @@ components:
           type: number
         veiculo:
           $ref: '#/components/schemas/CargaOrdemServicoVeiculoVM'
+        DMS:
+          nullable: true
+          type: string
+        VersionDMS:
+          nullable: true
+          type: string  
       title: Repair
       type: object
     CargaOrdemServicoVeiculoVM:
@@ -262,9 +252,6 @@ components:
           format: int32
           type: integer
         chassi:
-          nullable: true
-          type: string
-        codigoExterno:
           nullable: true
           type: string
         descricao:
@@ -444,20 +431,22 @@ components:
       type: object
     StatusNota:
       enum:
-      - N
-      - D
-      - C
+      - N (Normal)
+      - D (Denegada)
+      - C (Cancelada)
       type: string
     StatusOrdemServico:
       enum:
-      - O
-      - C
+      - A (Aberta)
+      - F (Fechada)
+      - C (Cancelada)
+      - E (Em Andamento)
       type: string
     TipoNota:
       enum:
-      - P
-      - S
-      - C
+      - P (Produto)
+      - S (Serviço)
+      - C (Complementar)
       type: string
     TipoVenda:
       enum:
