@@ -7,7 +7,7 @@ export default function Docs() {
 
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js';
+    script.src = 'https://cdn.jsdelivr.net/npm/redoc@2.1.3/bundles/redoc.standalone.js';
     script.async = true;
     document.body.appendChild(script);
 
